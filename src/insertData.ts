@@ -1,31 +1,19 @@
 import { client } from "../utils/client";
 
-const userDetails: User = {
-  username: "test",
-  email: "test@mail.com",
-  password: "123456789",
-};
-
-const todoDetails: Todo = {
-  title: "test title2",
-  description: "test desc2",
-  userId: 1,
-};
-
-interface User {
+export interface Users {
   username: string;
   password: string;
   email: string;
 }
 
-interface Todo {
+export interface Todos {
   title: string;
   description: string;
   done?: boolean;
   userId: number;
 }
 
-async function insertUser(user: User) {
+async function insertUser(user: Users) {
   try {
     const result = await client.user.create({
       data: {
@@ -42,7 +30,7 @@ async function insertUser(user: User) {
   }
 }
 
-async function insertTodo(todo: Todo) {
+async function insertTodo(todo: Todos) {
   try {
     const response = await client.todo.create({
       data: {
@@ -60,5 +48,4 @@ async function insertTodo(todo: Todo) {
   }
 }
 
-insertTodo(todoDetails);
-// insertUser(userDetails);
+export { insertTodo, insertUser };
